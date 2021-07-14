@@ -1,0 +1,45 @@
+/**
+ * theme color
+ */
+$primaryColor: #F70000;
+$disabledColor: #FFBFB9;
+$gradientColorStart: #FF7474;
+$gradientColorEnd: $primaryColor;
+$tagBgColor: #D7E0F8;
+$warnColor: #F90;
+$activeColor: #39BE72;
+
+/**
+ * font color
+ */
+$fontColor: #333;
+$secondaryColor: #6D7278;
+$placeholderColor: #999;
+$lineColor: #E7E7E7;
+$bgColor: #F5F5F7;
+
+/**
+ * font size
+ */
+$tagFontSize: 10px;
+$placeholderFontSize: 12px;
+$primaryFontSize: 14px;
+$titleFontSize: 16px;
+$moneyFontSize: 18px;
+
+/**
+ * line height
+ */
+$tagLineHeight: 16px;
+$placeholderLineHeight: 18px;
+$primaryLineHeight: 20px;
+$titleLineHeight: 22px;
+$moneyLineHeight: 24px;
+
+/**
+ *
+ */
+$topStickyBarHeight: var(--top-sticky-bar-height);
+$padding: 15px;
+$borderRadius: 10px;
+$borderHeight: 0.5px;
