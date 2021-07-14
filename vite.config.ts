@@ -18,7 +18,7 @@ export default ({ command, mode }: { mode: string, command: string; }) => {
         css: {
             preprocessorOptions: {
                 scss: {
-                    additionalData: '@import ./src/assets/styles/_variable.scss; @import ./src/assets/styles/_mixin.scss; @import ./src/assets/styles/_zIndex.scss; @import ./src/assets/styles/_function.scss;'
+                    additionalData: '@import "./src/assets/styles/_variable.scss"; @import "./src/assets/styles/_mixin.scss"; @import "./src/assets/styles/_zIndex.scss"; @import "./src/assets/styles/_function.scss";'
                 }
             }
         }
