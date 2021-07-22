@@ -11,10 +11,13 @@ export interface FetchConfigData {
     data?: string;
 }
 
-export interface FetchConfigInit {
-    url: string;
+export interface FetchConfigBasic {
     method: Method;
     headers?: FetchConfigHeaders;
+}
+
+export interface FetchConfigInit extends FetchConfigBasic{
+    url: string;
 }
 
 export interface FetchConfig extends FetchConfigData, FetchConfigInit {}
