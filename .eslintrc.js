@@ -20,7 +20,8 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
-    indent: ['error', 2],
+    // TODO
+    // indent: ['error', 2],
     'comma-dangle': ['error', 'never'],
     'react/jsx-indent': ['error', 2],
     'no-console': ['error', { allow: ['warn', 'error'] }],
@@ -33,7 +34,7 @@ module.exports = {
         beforeClosing: 'allow'
       }
     ],
-    'object-curly-spacing': ['warn', 'never'],
+    'object-curly-spacing': ['warn', 'always'],
     'react/jsx-indent-props': ['off', 'tab'],
     'import/no-unresolved': 'off',
     'no-unused-vars': 'off',
