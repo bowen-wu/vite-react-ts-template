@@ -1,4 +1,5 @@
-import React, { useReducer } from 'react';
+import * as React from 'react';
+import { useReducer } from 'react';
 import scopedClasses from './utils/scopedClasses';
 import Layout from './layouts/layout';
 import Routers from './routers';
@@ -11,16 +12,16 @@ import './App.scss';
 const sc = scopedClasses('App');
 
 const App = () => {
-    const [ state, dispatch ] = useReducer(storeReducer, store);
-    return (
-        <div className={sc()}>
-            <Context.Provider value={[state, dispatch]}>
-                <Layout>
-                    <Routers/>
-                </Layout>
-            </Context.Provider>
-        </div>
-    );
+  const [state, dispatch] = useReducer(storeReducer, store);
+  return (
+    <div className={sc()}>
+      <Context.Provider value={[state, dispatch]}>
+        <Layout>
+          <Routers />
+        </Layout>
+      </Context.Provider>
+    </div>
+  );
 };
 
 export default App;
