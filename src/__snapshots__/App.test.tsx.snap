@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test App router take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="App"
+  >
+    <div
+      class="layout"
+    >
+      <div
+        class="home"
+      >
+        This is Home Page
+        <div>
+          Skip Login
+        </div>
+        <h1>
+          This is User info
+        </h1>
+        <div>
+          name: test
+        </div>
+        <div>
+          id: test
+        </div>
+        <div>
+          LoginStatus: 
+          <button>
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
