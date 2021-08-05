@@ -2,6 +2,7 @@
   "name": "jh-demo-page",
   "version": "0.0.0",
   "scripts": {
+    "test:updateSnapshots": "jest -u",
     "test": "jest",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx",
     "dev": "vite",
