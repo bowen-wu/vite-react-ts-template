@@ -3,6 +3,8 @@ node_modules
 dist
 dist-ssr
 *.local
+yarn.lock
+pnpm-lock.yaml
 
 .idea
 .vscode
