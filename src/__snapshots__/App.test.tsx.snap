@@ -374,6 +374,11 @@ exports[`Test App router take a snapshot 1`] = `
                   </button>
                 </div>
               </div>
+              <div />
+              <div />
+              <div>
+                <div />
+              </div>
             </div>
           </main>
         </div>
