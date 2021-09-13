@@ -1,20 +1,21 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import routerConfig, { RouterConfigInterface } from './routeConfig';
+import React, { Fragment } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import routerConfig from './routeConfig';
+import { Route as RouteInterface } from '@ant-design/pro-layout/lib/typings';
 
-const Routers = () => (
-    <BrowserRouter>
-        <Switch>
-            {
-                routerConfig.map((router: RouterConfigInterface) => <Route exact
-                                                                           key={router.key}
-                                                                           path={router.path}
-                                                                           component={router.component}/>)
-            }
-        </Switch>
-    </BrowserRouter>
-);
+const renderRouter = (routers: RouteInterface[]) => {
+  return (
+    <Fragment>
+      {routers.map((router: RouteInterface) => {
+        if (router.routes && router.routes.length > 0) {
+          return renderRouter(router.routes);
+        }
+        return <Route exact key={router.path} path={router.path} component={router.component} />;
+      })}
+    </Fragment>
+  );
+};
+
+const Routers = () => <Switch>{renderRouter(routerConfig)}</Switch>;
 
 export default Routers;
-
-
