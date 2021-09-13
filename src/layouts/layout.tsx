@@ -1,19 +1,36 @@
-import React, { ReactNode } from 'react';
+import React, { useState } from 'react';
+import ProLayout from '@ant-design/pro-layout';
+import Routers from '../routers';
+import routerConfig from '../routers/routeConfig';
 import scopedClasses from '../utils/scopedClasses';
+import { useHistory } from 'react-router-dom';
 
 const sc = scopedClasses('layout');
 
-interface LayoutProps {
-    children: ReactNode,
-}
+const Layout = () => {
+  const history = useHistory();
+  const [pathname, setPathname] = useState('/');
 
-const Layout = (props: LayoutProps) => {
-    const { children } = props;
-    return (
-        <div className={sc()}>
-            {children}
-        </div>
-    );
+  return (
+    <ProLayout
+      route={{ path: '/', routes: routerConfig }}
+      location={{ pathname }}
+      menuItemRender={(item, dom) => (
+        <a
+          onClick={() => {
+            setPathname(item.path || '/');
+            history.push(item.path || '/');
+          }}
+        >
+          {dom}
+        </a>
+      )}
+    >
+      <div className={sc()}>
+        <Routers />
+      </div>
+    </ProLayout>
+  );
 };
 
 export default Layout;

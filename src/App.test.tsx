@@ -15,6 +15,5 @@ describe('Test App router', () => {
     const { container } = render(<App />);
     expect(container.querySelector('div.App')).toBeTruthy();
     expect(container.querySelector('div.layout')).toBeTruthy();
-    expect(container.querySelector('div.home')).toBeTruthy();
   });
 });

@@ -2,10 +2,11 @@ import * as React from 'react';
 import { useReducer } from 'react';
 import scopedClasses from './utils/scopedClasses';
 import Layout from './layouts/layout';
-import Routers from './routers';
 import initializeStore from './stores/initializeStore';
 import Context from './stores/context';
 import { storeReducer } from './stores/reducers';
+import { BrowserRouter } from 'react-router-dom';
+import 'antd/dist/antd.less';
 
 import './App.scss';
 
@@ -16,9 +17,9 @@ const App = () => {
   return (
     <div className={sc()}>
       <Context.Provider value={[state, dispatch]}>
-        <Layout>
-          <Routers />
-        </Layout>
+        <BrowserRouter>
+          <Layout />
+        </BrowserRouter>
       </Context.Provider>
     </div>
   );
