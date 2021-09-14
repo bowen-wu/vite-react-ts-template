@@ -1,0 +1,18 @@
+.layout-header-avatar-dropdown {
+  height: 100%;
+
+  &-trigger {
+    height: 100%;
+    @include flex(center, center);
+    cursor: pointer;
+
+    &-avatar {
+      @include icon(26px, 26px);
+      margin-right: 8px;
+    }
+
+    &-name {
+      @include fontLineColor(14px, 16px, rgba(255, 255, 255, 0.65));
+    }
+  }
+}

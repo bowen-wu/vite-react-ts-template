@@ -7,8 +7,14 @@ import { Route } from '@ant-design/pro-layout/lib/typings';
 
 const routerConfig: Route[] = [
   {
-    path: '/login',
-    component: Login
+    path: '/user',
+    routes: [
+      {
+        path: '/user/login',
+        layout: false,
+        component: Login
+      }
+    ]
   },
   {
     path: '/',
