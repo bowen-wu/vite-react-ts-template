@@ -1,0 +1,17 @@
+.layout-header {
+  position: relative;
+
+  &-title {
+    @include fontLineColor(28px, 32px, #dcdcdc);
+    font-weight: 600;
+    text-align: center;
+    padding: 14px 0;
+  }
+
+  &-content {
+    position: absolute;
+    top: 0;
+    right: 24px;
+    height: 100%;
+  }
+}

@@ -1,0 +1,13 @@
+.layout-header-right-content {
+  height: 100%;
+  @include flex();
+
+  &-notice {
+    @include icon(24px, 24px);
+    margin-right: 16px;
+  }
+
+  &-avatar {
+    height: 100%;
+  }
+}

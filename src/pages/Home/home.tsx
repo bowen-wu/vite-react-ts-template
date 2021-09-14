@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <div className={sc()}>
       This is Home Page
-      <div onClick={() => history.push('/login')}>Skip Login</div>
+      <div onClick={() => history.push('/user/login')}>Skip Login</div>
       <h1>This is User info</h1>
       <div>name: {user.name}</div>
       <div>id: {user.id}</div>

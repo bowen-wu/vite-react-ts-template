@@ -1,0 +1,13 @@
+.layout {
+  @include widthHeight();
+
+  .ant-pro-sider-logo {
+    padding: 19px 16px;
+  }
+
+  &-footer {
+    @include fontLineColor(14px, 16px, rgba(0, 0, 0, 0.45));
+    @include flex(center, center);
+    padding: 16px 0 24px;
+  }
+}
