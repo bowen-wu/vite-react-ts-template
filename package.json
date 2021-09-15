@@ -20,6 +20,7 @@
         "react-router-dom": "^5.2.0"
     },
     "devDependencies": {
+        "@ant-design/pro-form": "^1.40.0",
         "@ant-design/pro-layout": "^6.25.4",
         "@commitlint/cli": "^13.1.0",
         "@commitlint/config-conventional": "^13.1.0",
