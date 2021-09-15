@@ -1,5 +1,5 @@
 import Home from '../pages/Home/home';
-import Login from '../pages/Login/login';
+import Login from '../pages/user/Login/login';
 import Admin from '../pages/Admin';
 import Welcome from '../pages/Welcome';
 import ListTableList from '../pages/ListTableList';

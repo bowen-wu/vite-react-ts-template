@@ -10,7 +10,7 @@ const renderRouter = (routers: RouteInterface[]) => {
         const key = router.name ? `${router.path}-${router.name}` : router.path;
 
         if (router.routes && router.routes.length > 0) {
-          return <div key={key}>{renderRouter(router.routes)}</div>;
+          return <Fragment key={key}>{renderRouter(router.routes)}</Fragment>;
         }
 
         return <Route exact key={key} path={router.path} component={router.component} />;
