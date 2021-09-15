@@ -44,7 +44,7 @@ exports[`Test App router take a snapshot 1`] = `
                 >
                   <li
                     class="ant-menu-item ant-menu-item-only-child"
-                    data-menu-id="rc-menu-uuid-test-/welcome"
+                    data-menu-id="rc-menu-uuid-test-/8fe28777ec120cbb5309bbdba95c5e5b5ef850c04aa20f03052849d7a8f5eab2"
                     role="menuitem"
                     style="padding-left: 16px;"
                     tabindex="-1"

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import routerConfig from './routeConfig';
 import { Route as RouteInterface } from '@ant-design/pro-layout/lib/typings';
 
@@ -19,6 +19,6 @@ const renderRouter = (routers: RouteInterface[]) => {
   );
 };
 
-const Routers = () => <Switch>{renderRouter(routerConfig)}</Switch>;
+const Routers = () => renderRouter(routerConfig);
 
 export default Routers;
