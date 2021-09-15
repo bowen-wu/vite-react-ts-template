@@ -18,12 +18,8 @@ const routerConfig: Route[] = [
   },
   {
     path: '/',
-    component: Home
-  },
-  {
-    path: '/welcome',
-    name: '欢迎',
-    component: Welcome
+    component: Home,
+    name: '欢迎'
   },
   {
     path: '/test',
