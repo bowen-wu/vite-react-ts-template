@@ -11,6 +11,7 @@ const sc = scopedClasses('layout-header-avatar-dropdown');
 
 const HeaderAvatarDropdown = () => {
   const history = useHistory();
+  const localUser = localStorage.getItem('user');
   const [{ user }, dispatch] = useContext(Context);
   const onLogout = () => {
     sessionStorage.clear();
@@ -47,7 +48,9 @@ const HeaderAvatarDropdown = () => {
           <div className={sc('trigger-avatar')}>
             <img src={DefaultAvatar} alt="" />
           </div>
-          <div className={sc('trigger-name')}>{user.name}</div>
+          <div className={sc('trigger-name')}>
+            {localUser ? JSON.parse(localUser).username : user.username}
+          </div>
         </div>
       </Dropdown>
     </div>

@@ -22,6 +22,7 @@ export default ({ mode }: { mode: string; command: string }) => {
     define: {
       __PRODUCT_SUGGEST_URL__: JSON.stringify(''),
       __RESPONSE_DATA_CODE__: 200,
+      __TITLE__: JSON.stringify('智能矿灯预警查询管理平台'),
       ...config.define
     },
     css: {
@@ -31,7 +32,11 @@ export default ({ mode }: { mode: string; command: string }) => {
             '@import "./src/assets/styles/_variable.scss"; @import "./src/assets/styles/_mixin.scss"; @import "./src/assets/styles/_zIndex.scss"; @import "./src/assets/styles/_function.scss";'
         },
         less: {
-          javascriptEnabled: true
+          javascriptEnabled: true,
+          modifyVars: {
+            'primary-color': '#6680FF',
+            'error-color': '#FF80BF'
+          }
         }
       }
     },

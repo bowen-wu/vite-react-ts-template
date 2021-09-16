@@ -1,5 +1,15 @@
 .login {
   .ant-pro-form-login-container {
     justify-content: center;
+
+    .ant-pro-form-login-title {
+      @include fontLineColor(28px, 30px, $primaryColor);
+      margin-bottom: 64px;
+      font-weight: normal;
+    }
+  }
+
+  &-prefix {
+    @include icon(16px, 16px);
   }
 }

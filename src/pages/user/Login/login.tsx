@@ -1,56 +1,39 @@
-import type { CSSProperties } from 'react';
-import React, { Fragment, useContext, useState } from 'react';
-import { LoginForm, ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
-import {
-  AlipayCircleOutlined,
-  LockOutlined,
-  MobileOutlined,
-  TaobaoCircleOutlined,
-  UserOutlined,
-  WeiboCircleOutlined
-} from '@ant-design/icons';
-import { message, Space, Tabs } from 'antd';
-import scopedClasses from '../../../utils/scopedClasses';
-import './login.scss';
+import React, { useContext } from 'react';
+import { LoginForm, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { useHistory } from 'react-router-dom';
 import Context from '../../../stores/context';
+import { Tooltip } from 'antd';
 import { UserActionTypeEnum } from '../../../stores/user.store';
-
-type LoginType = 'phone' | 'account';
+import scopedClasses from '../../../utils/scopedClasses';
+import Account from '../../../assets/images/login/account.svg';
+import Password from '../../../assets/images/login/password.svg';
+import './login.scss';
 
 interface LoginWithAccountParams {
   username: string;
   password: string;
+  rememberAccount: boolean;
 }
 
-interface LoginWithPhoneParams {
-  phone: string;
-  captcha: string;
-}
-
-const iconStyles: CSSProperties = {
-  marginLeft: '16px',
-  color: 'rgba(0, 0, 0, 0.2)',
-  fontSize: '24px',
-  verticalAlign: 'middle',
-  cursor: 'pointer'
-};
 const sc = scopedClasses('login');
 
 const Login = () => {
   const history = useHistory();
-  const [loginType, setLoginType] = useState<LoginType>('phone');
   const [, dispatch] = useContext(Context);
+  const localUser = localStorage.getItem('user');
 
-  const onLogin = (values: LoginWithAccountParams | LoginWithPhoneParams) => {
-    sessionStorage.setItem('user', JSON.stringify(values));
+  const onLogin = ({ username, rememberAccount }: LoginWithAccountParams) => {
+    localStorage.setItem('user', JSON.stringify({ username, rememberAccount }));
+    sessionStorage.setItem('user', JSON.stringify({ username }));
     dispatch({
       type: UserActionTypeEnum.UPDATE_USER_INFO,
       payload: {
         loginStatus: true,
-        name: (values as LoginWithAccountParams).username || (values as LoginWithPhoneParams).phone
+        username
       }
     });
+
+    // TODO: Login Interface
     return Promise.resolve().then(() => {
       history.push('/');
     });
@@ -58,109 +41,50 @@ const Login = () => {
 
   return (
     <div style={{ backgroundColor: 'white', height: '100%' }} className={sc()}>
-      <LoginForm
-        logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
-        title="Github"
-        subTitle="全球最大同性交友网站"
-        actions={
-          <Space>
-            其他登录方式
-            <AlipayCircleOutlined style={iconStyles} />
-            <TaobaoCircleOutlined style={iconStyles} />
-            <WeiboCircleOutlined style={iconStyles} />
-          </Space>
-        }
-        onFinish={onLogin}
-      >
-        <Tabs activeKey={loginType} onChange={(activeKey) => setLoginType(activeKey as LoginType)}>
-          <Tabs.TabPane key={'account'} tab={'账号密码登录'} />
-          <Tabs.TabPane key={'phone'} tab={'手机号登录'} />
-        </Tabs>
-        {loginType === 'account' && (
-          <Fragment>
-            <ProFormText
-              name="username"
-              fieldProps={{
-                size: 'large',
-                prefix: <UserOutlined className={'prefixIcon'} />
-              }}
-              placeholder={'用户名: admin or user'}
-              rules={[
-                {
-                  required: true,
-                  message: '请输入用户名!'
-                }
-              ]}
-            />
-            <ProFormText.Password
-              name="password"
-              fieldProps={{
-                size: 'large',
-                prefix: <LockOutlined className={'prefixIcon'} />
-              }}
-              placeholder={'密码: ant.design'}
-              rules={[
-                {
-                  required: true,
-                  message: '请输入密码！'
-                }
-              ]}
-            />
-          </Fragment>
-        )}
-        {loginType === 'phone' && (
-          <Fragment>
-            <ProFormText
-              fieldProps={{
-                size: 'large',
-                prefix: <MobileOutlined className={'prefixIcon'} />
-              }}
-              name="mobile"
-              placeholder={'手机号'}
-              rules={[
-                {
-                  required: true,
-                  message: '请输入手机号！'
-                },
-                {
-                  pattern: /^1\d{10}$/,
-                  message: '手机号格式错误！'
-                }
-              ]}
-            />
-            <ProFormCaptcha
-              fieldProps={{
-                size: 'large',
-                prefix: <LockOutlined className={'prefixIcon'} />
-              }}
-              captchaProps={{
-                size: 'large'
-              }}
-              placeholder={'请输入验证码'}
-              captchaTextRender={(timing, count) => {
-                if (timing) {
-                  return `${count} ${'获取验证码'}`;
-                }
-                return '获取验证码';
-              }}
-              name="captcha"
-              rules={[
-                {
-                  required: true,
-                  message: '请输入验证码！'
-                }
-              ]}
-              onGetCaptcha={async () => {
-                message.success('获取验证码成功！验证码为：1234');
-              }}
-            />
-          </Fragment>
-        )}
+      <LoginForm title={__TITLE__} onFinish={onLogin}>
+        <ProFormText
+          initialValue={
+            localUser && JSON.parse(localUser).rememberAccount ? JSON.parse(localUser).username : ''
+          }
+          name="username"
+          fieldProps={{
+            size: 'large',
+            prefix: (
+              <div className={sc('prefix')}>
+                <img src={Account} alt="" />
+              </div>
+            )
+          }}
+          placeholder="请输入账号"
+          rules={[{ required: true, message: '请输入账号!' }]}
+        />
+        <ProFormText.Password
+          name="password"
+          fieldProps={{
+            size: 'large',
+            visibilityToggle: false,
+            prefix: (
+              <div className={sc('prefix')}>
+                <img src={Password} alt="" />
+              </div>
+            )
+          }}
+          placeholder="请输入密码"
+          rules={[{ required: true, message: '请输入密码！' }]}
+        />
         <div style={{ marginBottom: 24 }}>
-          <ProFormCheckbox noStyle name="autoLogin">
-            自动登录
+          <ProFormCheckbox
+            noStyle
+            name="rememberAccount"
+            initialValue={localUser ? JSON.parse(localUser).rememberAccount : false}
+          >
+            记住账号
           </ProFormCheckbox>
-          <a style={{ float: 'right' }}>忘记密码</a>
+          <div style={{ float: 'right', cursor: 'pointer' }}>
+            <Tooltip title="请联系超级管理员/客服找回">
+              <span>忘记账号/密码</span>
+            </Tooltip>
+          </div>
         </div>
       </LoginForm>
     </div>

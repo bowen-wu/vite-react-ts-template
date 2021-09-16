@@ -2,7 +2,7 @@ import { Store } from './initializeStore';
 import { Action } from './reducers';
 
 export interface UserState {
-  name: string;
+  username: string;
   id: string;
   loginStatus: boolean;
 }
@@ -13,7 +13,7 @@ export enum UserActionTypeEnum {
 }
 
 export const userInitialState: UserState = {
-  name: '',
+  username: '',
   id: '',
   loginStatus: false
 };
