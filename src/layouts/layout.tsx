@@ -1,8 +1,3 @@
-/**
- * 1. Avatar DownDrop
- * 2. router config layout false not working
- * 3. skip to login page when not login
- */
 import React from 'react';
 import ProLayout from '@ant-design/pro-layout';
 import routerConfig from '../routers/routeConfig';
@@ -41,15 +36,17 @@ const Layout = ({ location: { pathname } }: LayoutProps) => {
   };
   const targetRouter: Route | null = getMatchRouter(routerConfig, pathname);
 
-  // const isLogin = JSON.parse(sessionStorage.getItem('loginStatus'));
-
-  // if (pathname === "/") {
-  //     return <Redirect to="/user/login"/>;
-  // }
-
   if (!targetRouter) {
     history.push('/404');
     return null;
+  }
+
+  const userInfo = sessionStorage.getItem('user')
+    ? JSON.parse(sessionStorage.getItem('user') as string)
+    : null;
+  const loginPath = '/user/login';
+  if (!userInfo && (targetRouter as Route).path !== loginPath) {
+    history.replace('/user/login');
   }
 
   return (

@@ -1,17 +1,20 @@
-import React, { useState, Fragment } from 'react';
-import { LoginForm, ProFormText, ProFormCaptcha, ProFormCheckbox } from '@ant-design/pro-form';
+import type { CSSProperties } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
+import { LoginForm, ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import {
-  UserOutlined,
-  MobileOutlined,
-  LockOutlined,
   AlipayCircleOutlined,
+  LockOutlined,
+  MobileOutlined,
   TaobaoCircleOutlined,
+  UserOutlined,
   WeiboCircleOutlined
 } from '@ant-design/icons';
-import { message, Tabs, Space } from 'antd';
-import type { CSSProperties } from 'react';
+import { message, Space, Tabs } from 'antd';
 import scopedClasses from '../../../utils/scopedClasses';
 import './login.scss';
+import { useHistory } from 'react-router-dom';
+import Context from '../../../stores/context';
+import { UserActionTypeEnum } from '../../../stores/user.store';
 
 type LoginType = 'phone' | 'account';
 
@@ -19,6 +22,7 @@ interface LoginWithAccountParams {
   username: string;
   password: string;
 }
+
 interface LoginWithPhoneParams {
   phone: string;
   captcha: string;
@@ -34,11 +38,22 @@ const iconStyles: CSSProperties = {
 const sc = scopedClasses('login');
 
 const Login = () => {
+  const history = useHistory();
   const [loginType, setLoginType] = useState<LoginType>('phone');
+  const [, dispatch] = useContext(Context);
 
   const onLogin = (values: LoginWithAccountParams | LoginWithPhoneParams) => {
-    console.log(values);
-    return Promise.resolve();
+    sessionStorage.setItem('user', JSON.stringify(values));
+    dispatch({
+      type: UserActionTypeEnum.UPDATE_USER_INFO,
+      payload: {
+        loginStatus: true,
+        name: (values as LoginWithAccountParams).username || (values as LoginWithPhoneParams).phone
+      }
+    });
+    return Promise.resolve().then(() => {
+      history.push('/');
+    });
   };
 
   return (
