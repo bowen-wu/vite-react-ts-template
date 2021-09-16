@@ -8,18 +8,23 @@ export interface UserState {
 }
 
 export enum UserActionTypeEnum {
-  UPDATE_LOGIN_STATUE = 'updateLoginStatus'
+  UPDATE_USER_INFO = 'updateUserInfo',
+  INITIAL_USER_INFO = 'initialUserInfo'
 }
 
 export const userInitialState: UserState = {
-  name: 'test',
-  id: 'test',
-  loginStatus: true
+  name: '',
+  id: '',
+  loginStatus: false
 };
 
 export const userReducer = {
-  [UserActionTypeEnum.UPDATE_LOGIN_STATUE]: (state: Store, action: Action) => ({
+  [UserActionTypeEnum.UPDATE_USER_INFO]: (state: Store, action: Action) => ({
     ...state,
-    user: { ...state.user, loginStatus: action.payload.loginStatus }
+    user: { ...state.user, ...action.payload }
+  }),
+  [UserActionTypeEnum.INITIAL_USER_INFO]: (state: Store) => ({
+    ...state,
+    user: userInitialState
   })
 };

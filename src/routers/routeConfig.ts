@@ -4,6 +4,7 @@ import Admin from '../pages/Admin';
 import Welcome from '../pages/Welcome';
 import ListTableList from '../pages/ListTableList';
 import { Route } from '@ant-design/pro-layout/lib/typings';
+import NotFound from '../pages/404';
 
 const routerConfig: Route[] = [
   {
@@ -15,6 +16,11 @@ const routerConfig: Route[] = [
         component: Login
       }
     ]
+  },
+  {
+    path: '/404',
+    layout: false,
+    component: NotFound
   },
   {
     path: '/',
