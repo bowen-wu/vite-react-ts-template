@@ -67,6 +67,7 @@ exports[`Test App router take a snapshot 1`] = `
                           </div>
                         </span>
                         <input
+                          aria-label="account"
                           class="ant-input ant-input-lg"
                           id="username"
                           placeholder="请输入账号"
@@ -131,6 +132,7 @@ exports[`Test App router take a snapshot 1`] = `
                         </span>
                         <input
                           action="click"
+                          aria-label="password"
                           class="ant-input ant-input-lg"
                           id="password"
                           placeholder="请输入密码"
@@ -174,6 +176,7 @@ exports[`Test App router take a snapshot 1`] = `
                 </div>
               </div>
               <button
+                aria-label="login"
                 class="ant-btn ant-btn-primary ant-btn-lg"
                 style="width: 100%;"
                 type="button"

@@ -41,11 +41,15 @@ const Layout = ({ location: { pathname } }: LayoutProps) => {
     return null;
   }
 
-  const userInfo = sessionStorage.getItem('user')
-    ? JSON.parse(sessionStorage.getItem('user') as string)
-    : null;
+  const userInfo = (() => {
+    const localUserString = localStorage.getItem('user');
+    if (localUserString) {
+      return JSON.parse(localUserString);
+    }
+    return {};
+  })();
   const loginPath = '/user/login';
-  if (!userInfo && (targetRouter as Route).path !== loginPath) {
+  if (!userInfo.token && (targetRouter as Route).path !== loginPath) {
     history.replace('/user/login');
   }
 

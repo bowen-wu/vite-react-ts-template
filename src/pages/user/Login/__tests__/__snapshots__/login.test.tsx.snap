@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Login take a snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="login"
+    style="background-color: white; height: 100%;"
+  >
+    <div
+      class="ant-pro-form-login-container"
+    >
+      <div
+        class="ant-pro-form-login-top"
+      >
+        <div
+          class="ant-pro-form-login-header"
+        >
+          <span
+            class="ant-pro-form-login-title"
+          >
+            智能矿灯预警查询管理平台
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-pro-form-login-main"
+      >
+        <form
+          autocomplete="off"
+          class="ant-form ant-form-vertical"
+        >
+          <input
+            style="display: none;"
+            type="text"
+          />
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <span
+                    class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+                  >
+                    <span
+                      class="ant-input-prefix"
+                    >
+                      <div
+                        class="login-prefix"
+                      >
+                        <img
+                          alt=""
+                          src="[object Object]"
+                        />
+                      </div>
+                    </span>
+                    <input
+                      aria-label="account"
+                      class="ant-input ant-input-lg"
+                      id="username"
+                      placeholder="请输入账号"
+                      type="text"
+                      value=""
+                    />
+                    <span
+                      class="ant-input-suffix"
+                    >
+                      <span
+                        aria-label="close-circle"
+                        class="anticon anticon-close-circle ant-input-clear-icon-hidden ant-input-clear-icon"
+                        role="button"
+                        tabindex="-1"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          data-icon="close-circle"
+                          fill="currentColor"
+                          focusable="false"
+                          height="1em"
+                          viewBox="64 64 896 896"
+                          width="1em"
+                        >
+                          <path
+                            d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"
+                          />
+                        </svg>
+                      </span>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-row ant-form-item"
+          >
+            <div
+              class="ant-col ant-form-item-control"
+            >
+              <div
+                class="ant-form-item-control-input"
+              >
+                <div
+                  class="ant-form-item-control-input-content"
+                >
+                  <span
+                    class="ant-input-affix-wrapper ant-input-affix-wrapper-lg ant-input-password ant-input-password-large"
+                  >
+                    <span
+                      class="ant-input-prefix"
+                    >
+                      <div
+                        class="login-prefix"
+                      >
+                        <img
+                          alt=""
+                          src="[object Object]"
+                        />
+                      </div>
+                    </span>
+                    <input
+                      action="click"
+                      aria-label="password"
+                      class="ant-input ant-input-lg"
+                      id="password"
+                      placeholder="请输入密码"
+                      type="password"
+                      value=""
+                    />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            style="margin-bottom: 24px;"
+          >
+            <label
+              class="ant-checkbox-wrapper"
+            >
+              <span
+                class="ant-checkbox"
+              >
+                <input
+                  class="ant-checkbox-input"
+                  id="rememberAccount"
+                  type="checkbox"
+                  value=""
+                />
+                <span
+                  class="ant-checkbox-inner"
+                />
+              </span>
+              <span>
+                记住账号
+              </span>
+            </label>
+            <div
+              style="float: right; cursor: pointer;"
+            >
+              <span>
+                忘记账号/密码
+              </span>
+            </div>
+          </div>
+          <button
+            aria-label="login"
+            class="ant-btn ant-btn-primary ant-btn-lg"
+            style="width: 100%;"
+            type="button"
+          >
+            <span>
+              登 录
+            </span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

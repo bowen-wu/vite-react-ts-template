@@ -3,9 +3,10 @@ import { Dropdown, Menu } from 'antd';
 import scopedClasses from '../../utils/scopedClasses';
 import DefaultAvatar from '../../assets/images/avatar_default.svg';
 import { useHistory } from 'react-router-dom';
-import './index.scss';
 import Context from '../../stores/context';
 import { UserActionTypeEnum } from '../../stores/user.store';
+import { logout } from '../../utils/utils';
+import './index.scss';
 
 const sc = scopedClasses('layout-header-avatar-dropdown');
 
@@ -14,7 +15,8 @@ const HeaderAvatarDropdown = () => {
   const localUser = localStorage.getItem('user');
   const [{ user }, dispatch] = useContext(Context);
   const onLogout = () => {
-    sessionStorage.clear();
+    // TODO: fetch interface
+    logout();
     dispatch({ type: UserActionTypeEnum.INITIAL_USER_INFO });
     history.push('/user/login');
   };

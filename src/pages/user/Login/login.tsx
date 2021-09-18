@@ -7,6 +7,7 @@ import { UserActionTypeEnum } from '../../../stores/user.store';
 import scopedClasses from '../../../utils/scopedClasses';
 import Account from '../../../assets/images/login/account.svg';
 import Password from '../../../assets/images/login/password.svg';
+import { login } from '../../../utils/utils';
 import './login.scss';
 
 interface LoginWithAccountParams {
@@ -23,8 +24,8 @@ const Login = () => {
   const localUser = localStorage.getItem('user');
 
   const onLogin = ({ username, rememberAccount }: LoginWithAccountParams) => {
-    localStorage.setItem('user', JSON.stringify({ username, rememberAccount }));
-    sessionStorage.setItem('user', JSON.stringify({ username }));
+    // TODO: Login Interface & save token to localStorage
+    login({ username, rememberAccount, token: 'tempToken' });
     dispatch({
       type: UserActionTypeEnum.UPDATE_USER_INFO,
       payload: {
@@ -32,8 +33,6 @@ const Login = () => {
         username
       }
     });
-
-    // TODO: Login Interface
     return Promise.resolve().then(() => {
       history.push('/');
     });
@@ -41,7 +40,23 @@ const Login = () => {
 
   return (
     <div style={{ backgroundColor: 'white', height: '100%' }} className={sc()}>
-      <LoginForm title={__TITLE__} onFinish={onLogin}>
+      <LoginForm
+        title={__TITLE__}
+        onFinish={onLogin}
+        submitter={{
+          searchConfig: {
+            submitText: '登录'
+          },
+          render: (_, dom) => dom.pop(),
+          submitButtonProps: {
+            size: 'large',
+            style: {
+              width: '100%'
+            },
+            'aria-label': 'login'
+          }
+        }}
+      >
         <ProFormText
           initialValue={
             localUser && JSON.parse(localUser).rememberAccount ? JSON.parse(localUser).username : ''
@@ -53,10 +68,11 @@ const Login = () => {
               <div className={sc('prefix')}>
                 <img src={Account} alt="" />
               </div>
-            )
+            ),
+            'aria-label': 'account'
           }}
           placeholder="请输入账号"
-          rules={[{ required: true, message: '请输入账号!' }]}
+          rules={[{ required: true, message: '请输入账号！' }]}
         />
         <ProFormText.Password
           name="password"
@@ -67,7 +83,8 @@ const Login = () => {
               <div className={sc('prefix')}>
                 <img src={Password} alt="" />
               </div>
-            )
+            ),
+            'aria-label': 'password'
           }}
           placeholder="请输入密码"
           rules={[{ required: true, message: '请输入密码！' }]}
