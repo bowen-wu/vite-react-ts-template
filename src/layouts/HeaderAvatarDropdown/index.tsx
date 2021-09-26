@@ -1,19 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, Fragment } from 'react';
 import { Dropdown, Menu } from 'antd';
 import scopedClasses from '../../utils/scopedClasses';
 import DefaultAvatar from '../../assets/images/avatar_default.svg';
 import { useHistory } from 'react-router-dom';
 import Context from '../../stores/context';
-import { UserActionTypeEnum } from '../../stores/user.store';
+import { UserActionTypeEnum, UserState } from '../../stores/user.store';
 import { logout } from '../../utils/utils';
+import ModifyPassword from '../../assets/images/layout/modify_password.svg';
+import Logout from '../../assets/images/layout/logout.svg';
 import './index.scss';
+import { BaseProps } from '../layout';
 
 const sc = scopedClasses('layout-header-avatar-dropdown');
 
-const HeaderAvatarDropdown = () => {
+const HeaderAvatarDropdown = (props: BaseProps) => {
   const history = useHistory();
   const localUser = localStorage.getItem('user');
+  const [isAdmin] = useState(true);
   const [{ user }, dispatch] = useContext(Context);
+  const userInfo: UserState = localUser ? JSON.parse(localUser) : user;
+
   const onLogout = () => {
     // TODO: fetch interface
     logout();
@@ -22,24 +28,36 @@ const HeaderAvatarDropdown = () => {
   };
 
   const menu = (
-    <Menu>
-      <Menu.Item key="first">
-        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-          1st menu item
-        </a>
+    <Menu className={sc('menu')}>
+      <Menu.Item key="info">
+        <div className={sc('menu-info')}>
+          {isAdmin ? (
+            <div className={sc('menu-info-text')}>超级管理员</div>
+          ) : (
+            <Fragment>
+              <div className={sc('menu-info-text')}>管理员</div>
+              <div className={sc('menu-info-personal')}>{userInfo.username}</div>
+              <div className={sc('menu-info-personal')}>{userInfo.mobile}</div>
+              <div className={sc('menu-info-personal')}>{userInfo.department}</div>
+            </Fragment>
+          )}
+        </div>
       </Menu.Item>
-      <Menu.Item key="second">
-        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-          2nd menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item key="third">
-        <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-          3rd menu item
-        </a>
+      <Menu.Item key="modifyPassword">
+        <div onClick={props.onModifyPassword} className={sc('menu-item')}>
+          <div className={sc('menu-item-icon')}>
+            <img src={ModifyPassword} alt="" />
+          </div>
+          <div className={sc('menu-item-text')}>修改密码</div>
+        </div>
       </Menu.Item>
       <Menu.Item key="logout">
-        <div onClick={onLogout}>退出登录</div>
+        <div onClick={onLogout} className={sc('menu-item')}>
+          <div className={sc('menu-item-icon')}>
+            <img src={Logout} alt="" />
+          </div>
+          <div className={sc('menu-item-text')}>退出登录</div>
+        </div>
       </Menu.Item>
     </Menu>
   );
@@ -50,9 +68,7 @@ const HeaderAvatarDropdown = () => {
           <div className={sc('trigger-avatar')}>
             <img src={DefaultAvatar} alt="" />
           </div>
-          <div className={sc('trigger-name')}>
-            {localUser ? JSON.parse(localUser).username : user.username}
-          </div>
+          <div className={sc('trigger-name')}>{userInfo.username}</div>
         </div>
       </Dropdown>
     </div>

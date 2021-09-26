@@ -12,6 +12,11 @@ export interface LoginUserInfo {
   token: string;
 }
 
-export const login = (userInfo: LoginUserInfo) => {
-  localStorage.setItem('user', JSON.stringify(userInfo));
+export const login = (user: LoginUserInfo) => {
+  localStorage.setItem('user', JSON.stringify(user));
+};
+
+export const isLogged = () => {
+  const localUser = localStorage.getItem('user');
+  return Boolean(localUser && JSON.parse(localUser).token);
 };

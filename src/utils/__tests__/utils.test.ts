@@ -1,7 +1,12 @@
-import { login, LoginUserInfo, logout } from '../utils';
+import { isLogged, login, LoginUserInfo, logout } from '../utils';
 import { cleanup } from '@testing-library/react';
 
 describe('Test utils', () => {
+  const userInfo: LoginUserInfo = {
+    username: 'test',
+    rememberAccount: false,
+    token: 'tempToken'
+  };
   afterEach(() => {
     jest.clearAllMocks();
     cleanup();
@@ -11,11 +16,6 @@ describe('Test utils', () => {
   it('test login', () => {
     const spyLocalStorageSetItem = jest.spyOn(localStorage, 'setItem');
     expect(localStorage.getItem('user')).toBeFalsy();
-    const userInfo: LoginUserInfo = {
-      username: 'test',
-      rememberAccount: false,
-      token: 'tempToken'
-    };
     login(userInfo);
     expect(spyLocalStorageSetItem).toBeCalled();
     const localUserString = localStorage.getItem('user');
@@ -32,11 +32,6 @@ describe('Test utils', () => {
     const spyLocalStorageSetItem = jest.spyOn(localStorage, 'setItem');
     const spyLocalStorageGetItem = jest.spyOn(localStorage, 'getItem');
     expect(localStorage.getItem('user')).toBeFalsy();
-    const userInfo: LoginUserInfo = {
-      username: 'test',
-      rememberAccount: false,
-      token: 'tempToken'
-    };
     login(userInfo);
     logout();
     expect(spyLocalStorageSetItem).toBeCalledTimes(2);
@@ -49,5 +44,11 @@ describe('Test utils', () => {
       expect(localUser.token).toBe(undefined);
       expect(localUser.rememberAccount).toBe(userInfo.rememberAccount);
     }
+  });
+
+  it('test isLogged', () => {
+    expect(isLogged()).toBe(false);
+    login(userInfo);
+    expect(isLogged()).toBe(true);
   });
 });

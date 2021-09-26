@@ -26,12 +26,12 @@ const Login = () => {
   const onLogin = ({ username, rememberAccount }: LoginWithAccountParams) => {
     // TODO: Login Interface & save token to localStorage
     login({ username, rememberAccount, token: 'tempToken' });
+
+    // TODO: getUserInfo Interface & save info to localStorage
+    const info = { username, mobile: '18888888888', department: '工业智能部' };
     dispatch({
       type: UserActionTypeEnum.UPDATE_USER_INFO,
-      payload: {
-        loginStatus: true,
-        username
-      }
+      payload: info
     });
     return Promise.resolve().then(() => {
       history.push('/');

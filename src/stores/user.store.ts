@@ -3,8 +3,8 @@ import { Action } from './reducers';
 
 export interface UserState {
   username: string;
-  id: string;
-  loginStatus: boolean;
+  mobile: string;
+  department: string;
 }
 
 export enum UserActionTypeEnum {
@@ -14,8 +14,8 @@ export enum UserActionTypeEnum {
 
 export const userInitialState: UserState = {
   username: '',
-  id: '',
-  loginStatus: false
+  mobile: '',
+  department: ''
 };
 
 export const userReducer = {
