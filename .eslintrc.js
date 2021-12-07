@@ -39,6 +39,7 @@ module.exports = {
     'import/no-unresolved': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
-    '@typescript-eslint/no-empty-function': ['error', { allow: ['arrowFunctions'] }]
+    '@typescript-eslint/no-empty-function': ['error', { allow: ['arrowFunctions'] }],
+    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }]
   }
 };

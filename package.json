@@ -7,9 +7,7 @@
         "test": "jest",
         "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx",
         "dev": "vite",
-        "build:prod": "tsc && vite build",
-        "build:dev": "tsc && vite build --mode dev",
-        "build:test": "tsc && vite build --mode test",
+        "build": "vite build",
         "serve": "vite preview"
     },
     "dependencies": {
