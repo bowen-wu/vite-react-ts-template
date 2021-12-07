@@ -1,14 +1,14 @@
-import { defineConfig } from 'vite';
+import { defineConfig, UserConfigExport } from 'vite';
 import reactRefresh from '@vitejs/plugin-react-refresh';
 
-export default () => {
+export default (): UserConfigExport => {
   return defineConfig({
     plugins: [reactRefresh()],
     define: {
       __PRODUCT_SUGGEST_URL__: JSON.stringify(''),
       __RESPONSE_DATA_CODE__: 200,
       __TITLE__: JSON.stringify('讯飞煤炭安全监测平台'),
-      __BASE_URL__: '/'
+      __BASE_URL__: JSON.stringify('/')
     },
     css: {
       preprocessorOptions: {
