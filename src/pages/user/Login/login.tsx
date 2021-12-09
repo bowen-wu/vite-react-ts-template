@@ -25,7 +25,7 @@ const Login = () => {
 
   const onLogin = ({ username, rememberAccount }: LoginWithAccountParams) => {
     // TODO: Login Interface & save token to localStorage
-    login({ username, rememberAccount, token: 'tempToken' });
+    login({ username, rememberAccount, token: 'Bearer test1' });
 
     // TODO: getUserInfo Interface & save info to localStorage
     const info = { username, mobile: '18888888888', department: '工业智能部' };
