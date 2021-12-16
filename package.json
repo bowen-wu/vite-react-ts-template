@@ -3,6 +3,7 @@
     "version": "0.0.0",
     "license": "MIT",
     "scripts": {
+        "postinstall": "husky install",
         "test:updateSnapshots": "jest -u",
         "test": "jest",
         "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx",
