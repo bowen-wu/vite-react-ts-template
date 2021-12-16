@@ -1,4 +1,4 @@
-export const logout = () => {
+export const storageRemoveLoginInfo = () => {
   const localUserString = localStorage.getItem('user');
   if (localUserString) {
     const { username, rememberAccount } = JSON.parse(localUserString);
@@ -12,7 +12,7 @@ export interface LoginUserInfo {
   token: string;
 }
 
-export const login = (user: LoginUserInfo) => {
+export const loginUserInfoSaveToStorage = (user: LoginUserInfo) => {
   localStorage.setItem('user', JSON.stringify(user));
 };
 

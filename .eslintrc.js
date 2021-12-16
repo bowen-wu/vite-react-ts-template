@@ -40,6 +40,7 @@ module.exports = {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
     '@typescript-eslint/no-empty-function': ['error', { allow: ['arrowFunctions'] }],
-    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }]
+    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    '@typescript-eslint/explicit-module-boundary-types': 'off'
   }
 };

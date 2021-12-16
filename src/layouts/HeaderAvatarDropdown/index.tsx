@@ -5,7 +5,7 @@ import DefaultAvatar from '../../assets/images/avatar_default.svg';
 import { useHistory } from 'react-router-dom';
 import Context from '../../stores/context';
 import { UserActionTypeEnum, UserState } from '../../stores/user.store';
-import { logout } from '../../utils/utils';
+import { storageRemoveLoginInfo } from '../../utils/utils';
 import ModifyPassword from '../../assets/images/layout/modify_password.svg';
 import Logout from '../../assets/images/layout/logout.svg';
 import './index.scss';
@@ -22,7 +22,7 @@ const HeaderAvatarDropdown = (props: BaseProps) => {
 
   const onLogout = () => {
     // TODO: fetch interface
-    logout();
+    storageRemoveLoginInfo();
     dispatch({ type: UserActionTypeEnum.INITIAL_USER_INFO });
     history.push('/user/login');
   };

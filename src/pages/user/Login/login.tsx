@@ -7,7 +7,7 @@ import { UserActionTypeEnum } from '../../../stores/user.store';
 import scopedClasses from '../../../utils/scopedClasses';
 import Account from '../../../assets/images/login/account.svg';
 import Password from '../../../assets/images/login/password.svg';
-import { login } from '../../../utils/utils';
+import { loginUserInfoSaveToStorage } from '../../../utils/utils';
 import './login.scss';
 
 interface LoginWithAccountParams {
@@ -25,7 +25,7 @@ const Login = () => {
 
   const onLogin = ({ username, rememberAccount }: LoginWithAccountParams) => {
     // TODO: Login Interface & save token to localStorage
-    login({ username, rememberAccount, token: 'Bearer test1' });
+    loginUserInfoSaveToStorage({ username, rememberAccount, token: 'Bearer test1' });
 
     // TODO: getUserInfo Interface & save info to localStorage
     const info = { username, mobile: '18888888888', department: '工业智能部' };
@@ -34,7 +34,7 @@ const Login = () => {
       payload: info
     });
     return Promise.resolve().then(() => {
-      history.push('/');
+      history.replace('/');
     });
   };
 

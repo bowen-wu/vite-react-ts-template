@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import ProLayout from '@ant-design/pro-layout';
 import ProForm, { ModalForm, ProFormInstance, ProFormText } from '@ant-design/pro-form';
 import routerConfig from '../routers/routeConfig';
@@ -10,9 +10,7 @@ import { match } from 'react-router';
 import Routers from '../routers';
 import Context from '../stores/context';
 import { UserActionTypeEnum } from '../stores/user.store';
-import { isLogged, logout } from '../utils/utils';
-import { Modal } from 'antd';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { isLogged, storageRemoveLoginInfo } from '../utils/utils';
 import './layout.scss';
 
 const sc = scopedClasses('layout');
@@ -31,8 +29,6 @@ interface LayoutProps {
   computedMatch: match;
   location: Location;
 }
-
-let unregisterCallback: () => void;
 
 const Layout = ({ location: { pathname } }: LayoutProps) => {
   const history = useHistory();
@@ -57,37 +53,6 @@ const Layout = ({ location: { pathname } }: LayoutProps) => {
   };
   const targetRouter: Route | null = getMatchRouter(routerConfig, pathname);
 
-  useEffect(() => {
-    if (isLogged()) {
-      // TODO: getUserInfo Interface & save info to localStorage
-      const userInfo = { username: 'xxx', mobile: '18888888888', department: '工业智能部' };
-      dispatch({
-        type: UserActionTypeEnum.UPDATE_USER_INFO,
-        payload: userInfo
-      });
-    }
-
-    unregisterCallback && unregisterCallback();
-    unregisterCallback = history.listen((listener) => {
-      const isHomePage = listener.pathname === '/';
-      if (isLogged() && isHomePage) {
-        // TODO: call isFirstLogged Interface
-        const isFirstLogged = true;
-        if (isFirstLogged) {
-          Modal.confirm({
-            icon: <ExclamationCircleOutlined />,
-            title: '请及时修改密码，降低安全风险',
-            okText: '修改密码',
-            cancelText: '取消',
-            onOk: () => {
-              setModifyPasswordModalVisible(true);
-            }
-          });
-        }
-      }
-    });
-  }, []);
-
   if (!targetRouter) {
     history.push('/404');
     return null;
@@ -99,14 +64,17 @@ const Layout = ({ location: { pathname } }: LayoutProps) => {
     history.replace('/user/login');
   }
 
+  if (isLogged() && (targetRouter as Route).path === loginPath) {
+    history.replace('/');
+  }
+
   const onModifyPassword = () => setModifyPasswordModalVisible(true);
 
-  const onConfirmModifyPassword = async (values: ModifyPasswordValues) => {
+  const onConfirmModifyPassword = async () => {
     // TODO: call modifyPassword Interface
-    console.log(values);
     setModifyPasswordModalVisible(false);
     modifyPasswordFormRef.current?.resetFields();
-    logout();
+    storageRemoveLoginInfo();
     dispatch({ type: UserActionTypeEnum.INITIAL_USER_INFO });
     history.push('/user/login');
   };

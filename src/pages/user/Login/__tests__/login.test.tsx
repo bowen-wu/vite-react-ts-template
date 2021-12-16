@@ -60,7 +60,7 @@ describe('Test Login', () => {
 
     await waitFor(() => {
       // history
-      expect(history.length).toBe(2);
+      expect(history.length).toBe(1);
       expect(history.location.pathname).toBe('/');
     });
   });
@@ -79,7 +79,7 @@ describe('Test Login', () => {
     expect((inputOfCheckbox as HTMLInputElement).checked).toBe(true);
   });
 
-  it("test don't remember account", () => {
+  it('test donot remember account', () => {
     localStorage.setItem('user', JSON.stringify({ username: 'account', rememberAccount: false }));
     const { inputOfAccount, inputOfCheckbox } = setup();
 

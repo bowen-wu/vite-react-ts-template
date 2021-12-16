@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { message } from 'antd';
+import { storageRemoveLoginInfo } from '../utils/utils';
 
 export enum Method {
   POST = 'post',
@@ -54,15 +56,22 @@ const FetchData = async (fetchDataParams: FetchConfig) => {
     if (res.status === 200) {
       const result = res.data;
       if (result.code !== __RESPONSE_DATA_CODE__) {
-        // Toast.info(result.msg, 1);
-        throw new Error(result.error);
+        const userStorage = localStorage.getItem('user');
+        if (result.code === 401) {
+          if (userStorage && JSON.parse(userStorage).token) {
+            message.error(result.msg);
+            storageRemoveLoginInfo();
+            window.location.replace('/user/login');
+          }
+          return;
+        }
+        message.error(result.msg);
+        throw new Error(result.msg);
       }
       return result;
     }
     // TODO: 定制 401 + 5XX 页面
     if (res.status === 401) {
-      // 登录页面
-
       // 何时取消请求：多个请求同时发出，有一个 401 => Promise.all
       abortController?.abort();
     }

@@ -1,4 +1,9 @@
-import { isLogged, login, LoginUserInfo, logout } from '../utils';
+import {
+  isLogged,
+  loginUserInfoSaveToStorage,
+  LoginUserInfo,
+  storageRemoveLoginInfo
+} from '../utils';
 import { cleanup } from '@testing-library/react';
 
 describe('Test utils', () => {
@@ -16,7 +21,7 @@ describe('Test utils', () => {
   it('test login', () => {
     const spyLocalStorageSetItem = jest.spyOn(localStorage, 'setItem');
     expect(localStorage.getItem('user')).toBeFalsy();
-    login(userInfo);
+    loginUserInfoSaveToStorage(userInfo);
     expect(spyLocalStorageSetItem).toBeCalled();
     const localUserString = localStorage.getItem('user');
     expect(localUserString).toBeTruthy();
@@ -28,12 +33,12 @@ describe('Test utils', () => {
     }
   });
 
-  it('test logout', () => {
+  it('test storageRemoveLoginInfo', () => {
     const spyLocalStorageSetItem = jest.spyOn(localStorage, 'setItem');
     const spyLocalStorageGetItem = jest.spyOn(localStorage, 'getItem');
     expect(localStorage.getItem('user')).toBeFalsy();
-    login(userInfo);
-    logout();
+    loginUserInfoSaveToStorage(userInfo);
+    storageRemoveLoginInfo();
     expect(spyLocalStorageSetItem).toBeCalledTimes(2);
     expect(spyLocalStorageGetItem).toBeCalledTimes(2);
     const localUserString = localStorage.getItem('user');
@@ -48,7 +53,7 @@ describe('Test utils', () => {
 
   it('test isLogged', () => {
     expect(isLogged()).toBe(false);
-    login(userInfo);
+    loginUserInfoSaveToStorage(userInfo);
     expect(isLogged()).toBe(true);
   });
 });
