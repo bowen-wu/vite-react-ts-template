@@ -52,17 +52,17 @@ const FetchData = async (fetchDataParams: FetchConfig) => {
       fetchConfig.body = body;
     }
 
+    console.warn(url);
     const res = await axios(url, fetchConfig);
     if (res.status === 200) {
       const result = res.data;
       if (result.code !== __RESPONSE_DATA_CODE__) {
-        const userStorage = localStorage.getItem('user');
         if (result.code === 401) {
-          if (userStorage && JSON.parse(userStorage).token) {
-            message.error(result.msg);
+          message.error(result.msg);
+          setTimeout(() => {
             storageRemoveLoginInfo();
             window.location.replace('/user/login');
-          }
+          }, 800);
           return;
         }
         message.error(result.msg);
